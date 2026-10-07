@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2563eb"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon.svg">
+<title>ប្រព័ន្ធគ្រប់គ្រងហាង Online</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="login" class="login">
+  <div class="loginBox">
+    <div class="logo">▤</div><h1>ប្រព័ន្ធគ្រប់គ្រងហាង</h1>
+    <p class="muted">Login ដើម្បី Sync ទិន្នន័យគ្រប់ឧបករណ៍</p>
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+    <button class="primary full" onclick="signIn()">ចូលប្រើ</button>
+    <button class="secondary full" onclick="signUp()">បង្កើតគណនីថ្មី</button>
+    <p id="authMsg" class="msg"></p>
+  </div>
+</div>
+
+<div id="app" hidden>
+<header class="top"><div><small>ONLINE SHOP MANAGEMENT</small><h1 id="brand">ប្រព័ន្ធគ្រប់គ្រងហាង</h1></div><button class="round" onclick="logout()">⇥</button></header>
+<main>
+<section id="home" class="page active"><h2>ផ្ទាំងគ្រប់គ្រង</h2>
+<div class="cards"><div class="card"><small>ចំណូលថ្ងៃនេះ</small><b id="dRevenue">$0.00</b></div><div class="card"><small>ចំណេញថ្ងៃនេះ</small><b id="dProfit">$0.00</b></div><div class="card"><small>វិក្កយបត្រ</small><b id="dOrders">0</b></div><div class="card"><small>ស្តុកទាប</small><b id="dLow">0</b></div></div>
+<div class="panel"><div class="panelHead"><h3>ការលក់ថ្មីៗ</h3><button class="link" onclick="go('sales')">មើលទាំងអស់</button></div><div id="recent"></div></div>
+</section>
+
+<section id="sales" class="page"><div class="head"><h2>ការលក់</h2><button class="primary" onclick="saleModal()">＋ លក់ថ្មី</button></div><input class="search" id="saleQ" placeholder="ស្វែងរកវិក្កយបត្រ/អតិថិជន" oninput="renderSales()"><div id="salesList"></div></section>
+<section id="products" class="page"><div class="head"><h2>ទំនិញ & ស្តុក</h2><button class="primary" onclick="productModal()">＋ ទំនិញ</button></div><input class="search" id="prodQ" placeholder="ស្វែងរកទំនិញ" oninput="renderProducts()"><div id="prodList"></div></section>
+<section id="customers" class="page"><div class="head"><h2>អតិថិជន</h2><button class="primary" onclick="customerModal()">＋ អតិថិជន</button></div><input class="search" id="custQ" placeholder="ស្វែងរកឈ្មោះ/ទូរស័ព្ទ" oninput="renderCustomers()"><div id="custList"></div></section>
+<section id="expenses" class="page"><div class="head"><h2>ចំណាយ</h2><button class="primary" onclick="expenseModal()">＋ ចំណាយ</button></div><div id="expenseList"></div></section>
+<section id="reports" class="page"><h2>របាយការណ៍</h2><div class="filters"><input type="date" id="from"><input type="date" id="to"><button class="primary" onclick="loadReports()">មើល</button></div><div class="cards"><div class="card"><small>លក់</small><b id="rSales">$0</b></div><div class="card"><small>ចំណេញ</small><b id="rProfit">$0</b></div><div class="card"><small>ចំណាយ</small><b id="rExpense">$0</b></div><div class="card"><small>វិក្កយបត្រ</small><b id="rOrders">0</b></div></div><div class="panel"><h3>លក់តាមថ្ងៃ</h3><div id="daily"></div></div></section>
+<section id="settings" class="page"><h2>ការកំណត់</h2><div class="panel"><label>ឈ្មោះហាង</label><input id="shopName"><label>លេខទូរស័ព្ទ</label><input id="shopPhone"><label>អាសយដ្ឋាន</label><textarea id="shopAddress"></textarea><label>រូបិយប័ណ្ណ</label><select id="currency"><option>$</option><option>៛</option></select><button class="primary full" onclick="saveSettings()">រក្សាទុក</button></div><div class="panel"><h3>គណនី</h3><p id="userEmail" class="muted"></p><button class="dangerBtn full" onclick="logout()">ចេញពីគណនី</button></div></section>
+</main>
+<nav class="nav"><button class="active" data-go="home">⌂<small>ដើម</small></button><button data-go="sales">🛒<small>លក់</small></button><button data-go="products">📦<small>ស្តុក</small></button><button data-go="customers">👤<small>អតិថិជន</small></button><button data-go="reports">📊<small>របាយការណ៍</small></button><button data-go="settings">⚙️<small>កំណត់</small></button></nav>
+<div id="modal" class="modal" hidden><div class="sheet"><div class="modalHead"><h3 id="mTitle"></h3><button onclick="closeModal()">×</button></div><div id="mBody"></div></div></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script><script src="app.js"></script>
+</body></html>
